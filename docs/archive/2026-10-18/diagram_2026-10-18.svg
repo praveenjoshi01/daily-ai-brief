@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 470" width="960" height="470" font-family="Helvetica,Arial,sans-serif">
+<rect width="960" height="470" fill="#fbfaf7"/>
+<text x="30" y="36" font-size="20" font-weight="700" fill="#1c1c1a">Where the counterfeit policy gets in, and where the fix goes</text>
+<g font-size="14" fill="#1c1c1a">
+<rect x="30" y="70" width="170" height="70" rx="8" fill="#fff" stroke="#8a8a82" stroke-width="2"/>
+<text x="115" y="100" text-anchor="middle" font-weight="700">User request</text><text x="115" y="120" text-anchor="middle">edit handbook</text>
+<rect x="30" y="170" width="170" height="70" rx="8" fill="#fde7df" stroke="#b4441f" stroke-width="2"/>
+<text x="115" y="198" text-anchor="middle" font-weight="700">profile_description</text><text x="115" y="218" text-anchor="middle">user-editable (attacker)</text>
+<rect x="290" y="105" width="190" height="100" rx="8" fill="#fff" stroke="#8a8a82" stroke-width="2"/>
+<text x="385" y="135" text-anchor="middle" font-weight="700">Classifier (judge)</text><text x="385" y="156" text-anchor="middle">is_risky probability</text><text x="385" y="176" text-anchor="middle">reads trusted + untrusted</text><text x="385" y="194" text-anchor="middle">text in one prompt</text>
+<rect x="570" y="105" width="150" height="100" rx="8" fill="#fff" stroke="#8a8a82" stroke-width="2"/>
+<text x="645" y="140" text-anchor="middle" font-weight="700">Gate</text><text x="645" y="162" text-anchor="middle">block if p &gt;= 0.5</text><text x="645" y="182" text-anchor="middle">0.893 vs 0.290</text>
+<rect x="790" y="105" width="140" height="100" rx="8" fill="#fff" stroke="#8a8a82" stroke-width="2"/>
+<text x="860" y="150" text-anchor="middle" font-weight="700">Tool call</text><text x="860" y="172" text-anchor="middle">edit_workspace_file</text>
+</g>
+<g stroke="#1c1c1a" stroke-width="2" fill="none" marker-end="url(#a)">
+<path d="M200 105 L290 135"/><path d="M200 205 L290 175" stroke="#b4441f"/><path d="M480 155 L570 155"/><path d="M720 155 L790 155"/>
+</g>
+<defs><marker id="a" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#1c1c1a"/></marker></defs>
+<rect x="290" y="300" width="640" height="120" rx="8" fill="#e6f1e4" stroke="#2f7a2a" stroke-width="2"/>
+<text x="610" y="332" text-anchor="middle" font-size="16" font-weight="700" fill="#1c1c1a">My addition: a deterministic permission check outside the model</text>
+<text x="610" y="358" text-anchor="middle" font-size="14" fill="#1c1c1a">can_edit = false  -&gt;  reject, no matter what the classifier says</text>
+<text x="610" y="382" text-anchor="middle" font-size="14" fill="#1c1c1a">The classifier becomes a second opinion, not the lock.</text>
+<path d="M645 205 L645 300" stroke="#2f7a2a" stroke-width="2" stroke-dasharray="6 4" fill="none"/>
+<path d="M860 205 L860 300" stroke="#2f7a2a" stroke-width="2" stroke-dasharray="6 4" fill="none"/>
+<text x="30" y="455" font-size="13" fill="#5d5c57">Red: untrusted text reaches the judge. Dashed green: checks that never read that text.</text>
+</svg>
