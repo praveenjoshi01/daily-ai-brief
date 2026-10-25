@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 470" font-family="Helvetica,Arial,sans-serif">
+<rect width="900" height="470" fill="#fbfaf6"/>
+<defs><marker id="a" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8z" fill="#333"/></marker></defs>
+<text x="30" y="36" font-size="20" font-weight="bold" fill="#1c1c1a">Where the monitor's view can diverge from the agent's</text>
+<rect x="30" y="70" width="170" height="70" rx="8" fill="#e8eef7" stroke="#3a5a8c"/><text x="115" y="100" text-anchor="middle" font-size="15" fill="#1c1c1a">Agent loop</text><text x="115" y="120" text-anchor="middle" font-size="12" fill="#444">acts, calls tools</text>
+<rect x="260" y="70" width="170" height="70" rx="8" fill="#e8eef7" stroke="#3a5a8c"/><text x="345" y="100" text-anchor="middle" font-size="15" fill="#1c1c1a">Serialize trajectory</text><text x="345" y="120" text-anchor="middle" font-size="12" fill="#444">what the monitor reads</text>
+<rect x="490" y="70" width="170" height="70" rx="8" fill="#e8eef7" stroke="#3a5a8c"/><text x="575" y="100" text-anchor="middle" font-size="15" fill="#1c1c1a">Monitor (LLM)</text><text x="575" y="120" text-anchor="middle" font-size="12" fill="#444">scores the trajectory</text>
+<rect x="720" y="70" width="150" height="70" rx="8" fill="#e8eef7" stroke="#3a5a8c"/><text x="795" y="100" text-anchor="middle" font-size="15" fill="#1c1c1a">Escalate</text><text x="795" y="120" text-anchor="middle" font-size="12" fill="#444">human review</text>
+<line x1="200" y1="105" x2="258" y2="105" stroke="#333" stroke-width="2" marker-end="url(#a)"/>
+<line x1="430" y1="105" x2="488" y2="105" stroke="#333" stroke-width="2" marker-end="url(#a)"/>
+<line x1="660" y1="105" x2="718" y2="105" stroke="#333" stroke-width="2" marker-end="url(#a)"/>
+<g fill="#fdecea" stroke="#b4441f">
+<rect x="30" y="200" width="230" height="64" rx="8"/><rect x="290" y="200" width="230" height="64" rx="8"/><rect x="550" y="200" width="320" height="64" rx="8"/>
+<rect x="30" y="300" width="230" height="64" rx="8"/><rect x="290" y="300" width="230" height="64" rx="8"/></g>
+<g font-size="13" fill="#1c1c1a">
+<text x="145" y="226" text-anchor="middle">1. Trigger gap</text><text x="145" y="246" text-anchor="middle" font-size="12" fill="#444">fires only at turn end</text>
+<text x="405" y="226" text-anchor="middle">2. Compaction gap</text><text x="405" y="246" text-anchor="middle" font-size="12" fill="#444">context condensed, not monitored</text>
+<text x="710" y="226" text-anchor="middle">3. Serialization mismatch</text><text x="710" y="246" text-anchor="middle" font-size="12" fill="#444">agent can craft input that breaks the monitor</text>
+<text x="145" y="326" text-anchor="middle">4. Control headers</text><text x="145" y="346" text-anchor="middle" font-size="12" fill="#444">client-set, can disable new agents</text>
+<text x="405" y="326" text-anchor="middle">5. Unmonitored tools</text><text x="405" y="346" text-anchor="middle" font-size="12" fill="#444">believed read-only, exploitable</text></g>
+<g stroke="#b4441f" stroke-width="1.5" stroke-dasharray="5,4" marker-end="url(#a)" fill="none">
+<path d="M115,200 L115,142"/><path d="M345,200 L345,142"/><path d="M710,200 Q640,170 600,142"/><path d="M115,300 Q60,200 70,142"/><path d="M405,300 Q480,200 520,142"/></g>
+<text x="30" y="410" font-size="13" fill="#444">My version adds the failure points as dashed arrows onto the pipeline. The report lists them as a flat list; drawing them shows</text>
+<text x="30" y="430" font-size="13" fill="#444">that four of five sit outside the monitor model itself: they are in triggers, plumbing and permissions around it.</text>
+<text x="30" y="454" font-size="11" fill="#777">Redrawn from findings in METR, "Red-Teaming OpenAI's Internal Agent Monitoring Systems", Oct 22, 2026. Placement of arrows is my interpretation.</text>
+</svg>
