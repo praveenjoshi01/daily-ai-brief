@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 420" font-family="Helvetica,Arial,sans-serif">
+<rect width="900" height="420" fill="#fbfaf6"/>
+<defs><marker id="a" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8z" fill="#333"/></marker></defs>
+<text x="30" y="34" font-size="20" font-weight="bold" fill="#1c1c1a">Two "isolated" agents, one physical host</text>
+<rect x="30" y="60" width="380" height="230" rx="10" fill="#e8eef7" stroke="#3a5a8c"/><text x="220" y="84" text-anchor="middle" font-size="14" font-weight="bold">microVM A</text>
+<rect x="490" y="60" width="380" height="230" rx="10" fill="#e8eef7" stroke="#3a5a8c"/><text x="680" y="84" text-anchor="middle" font-size="14" font-weight="bold">microVM B</text>
+<rect x="60" y="100" width="150" height="50" rx="6" fill="#fff" stroke="#3a5a8c"/><text x="135" y="130" text-anchor="middle" font-size="13">Sender agent</text>
+<rect x="700" y="100" width="150" height="50" rx="6" fill="#fff" stroke="#3a5a8c"/><text x="775" y="130" text-anchor="middle" font-size="13">Receiver agent</text>
+<text x="220" y="190" text-anchor="middle" font-size="12" fill="#a33">network: blocked</text>
+<text x="220" y="210" text-anchor="middle" font-size="12" fill="#a33">shared writable files: none</text>
+<text x="680" y="190" text-anchor="middle" font-size="12" fill="#a33">network: blocked</text>
+<text x="680" y="210" text-anchor="middle" font-size="12" fill="#a33">shared writable files: none</text>
+<rect x="30" y="310" width="840" height="90" rx="10" fill="#f6e9dc" stroke="#b4441f"/>
+<text x="450" y="334" text-anchor="middle" font-size="14" font-weight="bold">Shared host hardware: CPU cache (and disk write activity)</text>
+<text x="450" y="358" text-anchor="middle" font-size="12">1. Sender evicts chosen cache lines  =  bit 1; leaves them alone  =  bit 0</text>
+<text x="450" y="378" text-anchor="middle" font-size="12">2. Receiver times its reload: slow = evicted, fast = still cached</text>
+<path d="M135 150 L135 270 L450 270 L450 306" fill="none" stroke="#b4441f" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#a)"/>
+<path d="M450 306 L450 280 L775 280 L775 154" fill="none" stroke="#b4441f" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#a)"/>
+<text x="300" y="262" font-size="11" fill="#b4441f">timing signal in</text>
+<text x="600" y="274" font-size="11" fill="#b4441f">timing signal out</text>
+</svg>
