@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 470" width="900" height="470" font-family="Helvetica,Arial,sans-serif">
+<rect width="900" height="470" fill="#fbfaf7"/>
+<text x="450" y="30" text-anchor="middle" font-size="18" font-weight="700" fill="#1c1c1a">Where a rejected prompt becomes someone else's data</text>
+<g font-size="13" fill="#1c1c1a">
+<rect x="30" y="60" width="150" height="70" rx="8" fill="#fff" stroke="#8a867b"/><text x="105" y="90" text-anchor="middle">Client sends prompt</text><text x="105" y="110" text-anchor="middle">&gt; 681,280 tokens</text>
+<rect x="240" y="60" width="170" height="70" rx="8" fill="#fff" stroke="#8a867b"/><text x="325" y="88" text-anchor="middle">Intake: exceeds KV pool</text><text x="325" y="108" text-anchor="middle">marked "rejected", prompt</text><text x="325" y="124" text-anchor="middle">replaced by 1 token</text>
+<rect x="470" y="60" width="170" height="70" rx="8" fill="#fff4ee" stroke="#b4441f" stroke-width="2"/><text x="555" y="88" text-anchor="middle">Admission queues check</text><text x="555" y="108" text-anchor="middle">"finished?" not "rejected?"</text><text x="555" y="124" text-anchor="middle" font-weight="700" fill="#b4441f">request looks live</text>
+<rect x="700" y="60" width="170" height="70" rx="8" fill="#fff" stroke="#8a867b"/><text x="785" y="88" text-anchor="middle">Prefill node</text><text x="785" y="108" text-anchor="middle">trivial forward pass,</text><text x="785" y="124" text-anchor="middle">writes 1 KV page</text>
+</g>
+<g stroke="#5d5c57" stroke-width="2" fill="none" marker-end="url(#a)"><path d="M180 95H238"/><path d="M410 95H468"/><path d="M640 95H698"/></g>
+<defs><marker id="a" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0L10 5L0 10z" fill="#5d5c57"/></marker></defs>
+<path d="M785 130V205" stroke="#5d5c57" stroke-width="2" marker-end="url(#a)"/>
+<text x="775" y="172" text-anchor="end" font-size="12" fill="#5d5c57">RDMA transfer: 1 page only</text>
+<text x="450" y="228" text-anchor="middle" font-size="13" font-weight="700" fill="#5d5c57">DECODE NODE (reserved pages for the full prompt; example in the post: 8)</text>
+<g stroke="#8a867b">
+<rect x="130" y="245" width="70" height="60" fill="#d9ead3"/>
+<rect x="200" y="245" width="70" height="60" fill="#f4c7b8" stroke="#b4441f"/><rect x="270" y="245" width="70" height="60" fill="#f4c7b8" stroke="#b4441f"/><rect x="340" y="245" width="70" height="60" fill="#f4c7b8" stroke="#b4441f"/><rect x="410" y="245" width="70" height="60" fill="#f4c7b8" stroke="#b4441f"/><rect x="480" y="245" width="70" height="60" fill="#f4c7b8" stroke="#b4441f"/><rect x="550" y="245" width="70" height="60" fill="#f4c7b8" stroke="#b4441f"/><rect x="620" y="245" width="70" height="60" fill="#f4c7b8" stroke="#b4441f"/>
+</g>
+<text x="165" y="280" text-anchor="middle" font-size="12" fill="#1c1c1a">p1</text><text x="445" y="270" text-anchor="middle" font-size="12" fill="#1c1c1a">pages 2-8: never written</text><text x="445" y="288" text-anchor="middle" font-size="12" fill="#1c1c1a">by prefill; hold old data</text>
+<path d="M165 305V345" stroke="#5d5c57" stroke-width="2" marker-end="url(#a)"/><path d="M445 305V345" stroke="#b4441f" stroke-width="2" marker-end="url(#a)"/>
+<text x="165" y="365" text-anchor="middle" font-size="12" fill="#1c1c1a">attends to 1 valid page</text>
+<text x="445" y="365" text-anchor="middle" font-size="12" fill="#b4441f" font-weight="700">attends to 7 stale pages</text>
+<rect x="250" y="385" width="400" height="60" rx="8" fill="#fff" stroke="#b4441f" stroke-width="2"/><text x="450" y="410" text-anchor="middle" font-size="13" fill="#1c1c1a">Client receives HTTP 200, a fluent reply, and a prompt_tokens</text><text x="450" y="430" text-anchor="middle" font-size="13" fill="#1c1c1a">count matching the long prompt. Expected: HTTP 400.</text>
+<text x="885" y="462" text-anchor="end" font-size="10" fill="#8a867b">Redrawn from the mechanism in Cloudflare's postmortem; the stale-page highlighting is my addition.</text>
+</svg>
