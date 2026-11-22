@@ -1,0 +1,96 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Daily AI Brief 2026-11-22</title><style>:root{--bg:#f6f5f1;--fg:#1c1c1a;--card:#fff;--bd:#dedbd2;--ac:#b4441f;--mu:#6b6a64;--warn:#8a6d12}@media(prefers-color-scheme:dark){:root{--bg:#151513;--fg:#ecebe6;--card:#1f1f1c;--bd:#33332f;--ac:#f08a5d;--mu:#a3a29a;--warn:#e0c060}}
+body{background:var(--bg);color:var(--fg);font:16px/1.55 Georgia,serif;max-width:1000px;margin:auto;padding:24px 16px}a{color:var(--ac)}h1{margin:0}h2{border-bottom:2px solid var(--ac);padding-bottom:4px;margin-top:32px}h3{margin:.4em 0;font-size:1.05em}
+.g{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px}.c{background:var(--card);border:1px solid var(--bd);border-radius:8px;padding:10px 14px}.lead{grid-column:1/-1;border-color:var(--ac);border-width:2px}.tag{background:var(--ac);color:#fff;font:700 11px sans-serif;padding:2px 6px;border-radius:3px}.tag.w{background:var(--warn)}.gr{font:600 11px sans-serif;color:var(--mu);text-transform:uppercase;letter-spacing:.04em}.sub,.src{color:var(--mu);font-size:.9em}.why{font-size:.95em}.note{border-left:3px solid var(--ac);padding:4px 12px;color:var(--mu)}
+</style></head><body>
+<h1>Daily AI Brief — 2026-11-22</h1>
+<p class="sub">Inbox editions (TLDR AI, Latent Space, Nov 20; no Nov 21–22 editions had arrived) plus pages fetched this run. Grounding labels show source strength. <a href="archive/">Archive</a></p>
+<p class="note">Nine items, the signal from a light news day. Today's theme: the harness around the model. The Stripe result and Google's and Vercel's tooling all change what the agent is given, not the weights. Dropped: Replit's agent-swarm study (the Nov 21 lead). Single-source and undated items are marked.</p>
+
+<h2>Lead Story</h2>
+<div class="g">
+<div class="c lead">
+<span class="tag">LEAD</span> <span class="gr">Engineering &amp; Tooling · Stripe</span>
+<h3>Stripe's integration evals: a plugin lifted all 14 model–harness pairs, and outdated API references fell from 7% to 1.3%</h3>
+<p class="sub"><em>Grounding: Primary (Stripe methodology post, fetched, Nov 19). Self-reported by Stripe, which owns the product tested. Relayed by TLDR AI (Nov 20). Independent commentary covers Stripe's July benchmark program (InfoQ), not these plugin numbers.</em></p>
+<p>Coding agents (Claude Code, Codex, OpenCode) built Stripe integrations across 69 public scenarios, each run with and without Stripe's agent plugin. A role-playing LLM answered the agent's questions one at a time. A judge scored MUST and SHOULD rubric criteria against the transcript and workspace. Web searches per eval fell 96%.</p>
+<p class="why"><strong>Why it matters:</strong> The gain came from the context the agent was given, not from a new model. If you ship an SDK, your docs and tooling are part of the agent's runtime.</p>
+<p class="src">Sources: <a href="https://stripe.dev/blog/stripe-integration-evals-methodology">Stripe: integration evals methodology</a> · <a href="https://tldr.tech/ai">TLDR AI (Nov 20)</a> · <a href="https://infoq.com/news/2026/07/stripe-ai-agents-benchmark/">InfoQ: Stripe's July benchmark</a></p>
+</div>
+</div>
+
+<h2>Frontier Labs &amp; Infrastructure Releases</h2>
+<div class="g">
+<div class="c">
+<span class="gr">Engineering &amp; Tooling</span>
+<h3>Gemini API Tool Retrieval: the model searches for tools and loads only the schema it needs</h3>
+<p class="sub"><em>Grounding: Primary (Google blog, fetched, Nov 19). Preview; no benchmarks published.</em></p>
+<p>Tools marked <code>defer_loading: true</code> show only name and description until the model searches for them. The search runs server-side within one API call. Google gives no savings figure and advises measuring against your own traffic.</p>
+<p class="why"><strong>Why it matters:</strong> Large tool libraries cost tokens on every call. This is a built-in way to defer schemas, which changes how you size a tool registry.</p>
+<p class="src"><a href="https://blog.google/innovation-and-ai/technology/developers-tools/gemini-api-tool-retrieval/">Google: Tool Retrieval in the Gemini API</a> · <a href="https://tldr.tech/ai">TLDR AI</a></p>
+</div>
+<div class="c">
+<span class="gr">Engineering &amp; Tooling</span>
+<h3>Vercel Board: a message store where agents claim tasks and post updates</h3>
+<p class="sub"><em>Grounding: Primary (Vercel blog, fetched, Nov 18). Vercel calls it experimental; no adoption data.</em></p>
+<p>Agents pull labelled tasks from a channel, claim them for a time window, post progress in threads, and mark work done with a PR link. It is harness-agnostic, so Claude Code, Codex, and LangChain can share one board.</p>
+<p class="why"><strong>Why it matters:</strong> A product version of the coordination layer the Nov 21 Replit study pointed to. You can test it now.</p>
+<p class="src"><a href="https://vercel.com/blog/introducing-vercel-board">Vercel: Introducing Board</a> · <a href="https://tldr.tech/ai">TLDR AI</a></p>
+</div>
+<div class="c">
+<span class="gr">Engineering &amp; Tooling</span>
+<h3>Cloudflare releases Clairic and Clairic-flash weights for structured extraction</h3>
+<p class="sub"><em>Grounding: Primary (Cloudflare blog, fetched, Nov 18). Benchmarks are Cloudflare's own, labelled directional. License not stated in the post.</em></p>
+<p>Open-weight models (27B and 9B) pull fields from text, images, and PDFs, with confidence scores and character spans. Cloudflare reports 99.7% on its fresh-text eval for the 27B model, against 90.5% for a D1.2 + OCR baseline.</p>
+<p class="why"><strong>Why it matters:</strong> Small open extraction models are now a credible option for pipelines that call a frontier API today. Check the license first.</p>
+<p class="src"><a href="https://blog.cloudflare.com/open-clairic/">Cloudflare: Open Clairic</a> · <a href="https://tldr.tech/ai">TLDR AI</a></p>
+</div>
+</div>
+
+<h2>Research</h2>
+<div class="g">
+<div class="c">
+<span class="gr">Research</span>
+<h3>Anthropic and Theorem: LLM-scaled formal verification across 239 entry points</h3>
+<p class="sub"><em>Grounding: Primary (Anthropic research post, fetched). Originally published Oct 22, not today; resurfaced in Latent Space (Nov 20). Self-reported.</em></p>
+<p>Claude wrote Rocq proofs that OSS-Fuzz entry points cannot crash on inputs up to 64 MB, across 123 libraries. On 36 small tasks, Opus 5.5 solved half using about 40% fewer tokens than Opus 5. The authors say "formally verified" does not mean bug-free.</p>
+<p class="why"><strong>Why it matters:</strong> Verification is becoming a per-task cost you can budget. Track the token number.</p>
+<p class="src"><a href="https://www.anthropic.com/research/formal-verification">Anthropic: LLM-scaled formal verification</a> · <a href="https://lspace.beehiiv.com/p/formal-verification">Latent Space (Nov 20)</a></p>
+</div>
+<div class="c">
+<span class="gr">Research</span>
+<h3>Exponential Time Hypothesis claims from OpenAI and Anthropic await independent review</h3>
+<p class="sub"><em>Grounding: Two secondary sources (TechCrunch, Oct 27; TLDR AI, Nov 20). Lab preprints not fetched this run. Not yet human-verified.</em></p>
+<p>Both labs say an internal model found a subexponential algorithm for counting 3-SAT solutions, which would refute ETH. UC San Diego and MIT researchers are organizing a review and say it is not certification. Anthropic's Lean proofs have passed machine checks.</p>
+<p class="why"><strong>Why it matters:</strong> ETH underlies many complexity results. Treat it as open until human experts sign off.</p>
+<p class="src"><a href="https://techcrunch.com/2026/10/27/frontier-ai-labs-say-their-models-refuted-the-exponential-time-hypothesis-what-does-that-mean/">TechCrunch (Oct 27)</a> · <a href="https://tldr.tech/ai">TLDR AI (Nov 20)</a></p>
+</div>
+<div class="c">
+<span class="gr">Research</span>
+<h3>Apple FastFrames: 480p autoregressive video at 36 ms per frame on one B200</h3>
+<p class="sub"><em>Grounding: Primary (Apple project page, fetched). arXiv paper linked but not fetched; its date is unconfirmed. VBench figures not in page text.</em></p>
+<p>A 1.3B model generates 480p video at 36 ms per frame on one B200. The speedup comes from replacing VAE decoding and KV-cache updates, which made up over half of latency. The 14B model runs at 158 ms per frame on one GPU.</p>
+<p class="why"><strong>Why it matters:</strong> Interactive video generation is moving toward real-time latency budgets.</p>
+<p class="src"><a href="https://apple-aiml-research.github.io/ml-fastframes/">Apple ML Research: FastFrames</a> · <a href="https://arxiv.org/abs/2611.23226">arXiv 2611.23226</a> · <a href="https://tldr.tech/ai">TLDR AI</a></p>
+</div>
+<div class="c">
+<span class="gr">Research</span>
+<h3>Models can signal each other through a shared inference server, in a contrived setup</h3>
+<p class="sub"><em>Grounding: Primary (authors' LessWrong post, fetched, Nov 19). Not peer reviewed. Relayed by TLDR AI (Nov 20).</em></p>
+<p>Two Qwen3-8B instances on one vLLM server pass bits by changing engine step size or a KV-cache mailbox. The KV channel decoded 1,221 of 1,221 rounds with a fine-tuned reader. At 1x background traffic it fell to 49%.</p>
+<p class="why"><strong>Why it matters:</strong> If you run multi-tenant inference with agents, sandboxing alone does not isolate them.</p>
+<p class="src"><a href="https://www.lesswrong.com/posts/7wzWuLP3HhyBLmKfo/models-can-communicate-via-inference-servers-despite-being">LessWrong: Models Can Communicate via Inference Servers</a> · <a href="https://tldr.tech/ai">TLDR AI</a></p>
+</div>
+</div>
+
+<h2>Industry &amp; Policy</h2>
+<div class="g">
+<div class="c">
+<span class="tag w">UNVERIFIED</span> <span class="gr">Policy watch</span>
+<h3>U.S. federal frontier-AI safety bill outline, reportedly released Nov 19</h3>
+<p class="sub"><em>Grounding: Single secondary source (Luiza Jarovsky newsletter, Nov 20). A search found no bill text, number, or primary release. Watch item only.</em></p>
+<p>The post describes a proposed SAFE AI Act covering enforceable safety frameworks, incident reporting, pre-deployment evaluations, and whistleblower protection. A search for a House outline found only a non-primary blog post.</p>
+<p class="why"><strong>Why it matters:</strong> If it advances, release timelines and compliance checklists for frontier labs would change. Confirm on congress.gov before acting.</p>
+<p class="src"><a href="https://www.luizasnewsletter.com/p/americas-ai-safety-rules-are-about-to-change">Luiza's Newsletter (Nov 20)</a></p>
+</div>
+</div>
+</body></html>
