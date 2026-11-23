@@ -1,0 +1,103 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Daily AI Brief 2026-11-23</title><style>:root{--bg:#f6f5f1;--fg:#1c1c1a;--card:#fff;--bd:#dedbd2;--ac:#b4441f;--mu:#6b6a64;--warn:#8a6d12}@media(prefers-color-scheme:dark){:root{--bg:#151513;--fg:#ecebe6;--card:#1f1f1c;--bd:#33332f;--ac:#f08a5d;--mu:#a3a29a;--warn:#e0c060}}
+body{background:var(--bg);color:var(--fg);font:16px/1.55 Georgia,serif;max-width:1000px;margin:auto;padding:24px 16px}a{color:var(--ac)}h1{margin:0}h2{border-bottom:2px solid var(--ac);padding-bottom:4px;margin-top:32px}h3{margin:.4em 0;font-size:1.05em}
+.g{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px}.c{background:var(--card);border:1px solid var(--bd);border-radius:8px;padding:10px 14px}.lead{grid-column:1/-1;border-color:var(--ac);border-width:2px}.tag{background:var(--ac);color:#fff;font:700 11px sans-serif;padding:2px 6px;border-radius:3px}.tag.w{background:var(--warn)}.gr{font:600 11px sans-serif;color:var(--mu);text-transform:uppercase;letter-spacing:.04em}.sub,.src{color:var(--mu);font-size:.9em}.why{font-size:.95em}.note{border-left:3px solid var(--ac);padding:4px 12px;color:var(--mu)}
+</style></head><body>
+<h1>Daily AI Brief — 2026-11-23</h1>
+<p class="sub">Light inbox (one AI-relevant edition, Nov 22), so today leans on pages fetched this run. Grounding labels show source strength. <a href="../">Archive</a></p>
+<p class="note">Ten items. Today's theme: the routing layer between you and the model. The lead shows prompts leaking at hops a privacy flag never reaches, OpenAI is gating resellers, and Google is moving credentials outside the agent sandbox. Single-source and unverified items are marked.</p>
+<h2>Lead Story</h2>
+<div class="g">
+<div class="c lead">
+<span class="tag">LEAD</span> <span class="gr">Lead Story</span>
+<h3>Dragos canary-token study: about two million bait prompts found attackers inside three inference providers, and OpenRouter pulled 125 endpoints from ZDR eligibility</h3>
+<p class="sub"><em>Grounding: Primary (Dragos post by HD Moore, Nov 19, fetched), plus OpenRouter's announcement (Nov 22), Phala's and Together AI's incident notes (all fetched), and independent coverage by The Hacker News (Nov 22). Most providers are unnamed.</em></p>
+<p>From July to November, Dragos sent about two million prompts through routers and providers, each with a unique URL, DNS name, and AWS key. Attackers were stealing data inside three providers, including some requests flagged Zero Data Retention. One unnamed lab's systems fetched secret links from about two-thirds of ZDR-flagged requests. OpenRouter off-boarded three providers and says it was not itself breached.</p>
+<p class="why"><strong>Why it matters:</strong> A privacy flag binds only the first hop. Pin your upstream providers, keep secrets out of agent context, and plant your own canary credential.</p>
+<p class="src">Sources: <a href="https://www.dragos.com/blog/ai-supply-chain-security-canary-tokens">Dragos: Your AI supply chain needs canaries</a> · <a href="https://openrouter.ai/blog/announcements/data-processing-incidents-on-inference-providers/">OpenRouter announcement</a> · <a href="https://phala.com/posts/phala-november-preliminary-incident-report">Phala incident report</a> · <a href="https://www.together.ai/blog/security-event-prompt-leakage-for-requests-in-june-and-july-of-2026">Together AI security notice</a> · <a href="https://thehackernews.com/2026/11/openrouter-drops-3-providers-after.html">The Hacker News</a></p>
+</div>
+</div>
+<h2>Frontier Labs</h2>
+<div class="g">
+<div class="c">
+<span class="gr">Frontier Labs</span>
+<h3>Thinking Machines Inkling 2 Mini: an open-weights looped transformer that fits in about 20 GB</h3>
+<p class="sub"><em>Grounding: Primary (lab post, Nov 20, fetched). Benchmarks are self-reported. License not stated on the page.</em></p>
+<p>The model has 26.4B total parameters and 3.4B active per token. Its two middle blocks of layers run three times per token. The lab reports 48.2% on DeepSWE v1.1 and 71.6% on Terminal Bench v2.1, behind Qwen3.8-27B at 73.0%. It says the model is weaker on multi-turn chat and multi-constraint instructions.</p>
+<p class="why"><strong>Why it matters:</strong> A coding model that runs on a 32 GB Mac through Ollama is a real option for local agents. It also removes the third-party hop in today's lead story.</p>
+<p class="src">Sources: <a href="https://thinkingmachines.ai/news/inkling-2-mini/">Thinking Machines: Inkling 2 Mini</a></p>
+</div>
+<div class="c">
+<span class="gr">Frontier Labs</span>
+<h3>OpenAI publishes its internal perplexity numbers and proposes shared limits</h3>
+<p class="sub"><em>Grounding: Primary (OpenAI post by Jakub Pachocki, Nov 22, fetched). An opinion piece; figures are OpenAI's own and unverified.</em></p>
+<p>Pachocki reports log-perplexity on a held-out internal codebase: about 0.99 for GPT-3.5 and 0.91 for GPT-4. He says capabilities in mathematics and cybersecurity emerged below 0.8. He proposes that labs agree common limits tied to such measures. He also notes perplexity does not measure any task directly.</p>
+<p class="why"><strong>Why it matters:</strong> This is a pretraining-only metric. It says nothing about the harness, which is where most teams get their gains.</p>
+<p class="src">Sources: <a href="https://openai.com/index/perplexity-and-intelligence/">OpenAI: Perplexity and Intelligence</a></p>
+</div>
+</div>
+<h2>Engineering &amp; Tooling</h2>
+<div class="g">
+<div class="c">
+<span class="gr">Engineering &amp; Tooling</span>
+<h3>AWS DevOps Agent can now take directed write actions in five third-party services</h3>
+<p class="sub"><em>Grounding: Primary (AWS "What's new" documentation, entries dated Nov 20–22, fetched).</em></p>
+<p>Customers can let the agent create and update pull requests, retry pipelines, and roll back deployments in GitHub, GitLab, and Azure DevOps, and update incidents in ServiceNow and PagerDuty. On Nov 21, the Sandbox was extended to custom agents, with read-only AWS access and a network allowlist.</p>
+<p class="why"><strong>Why it matters:</strong> The agent moves from investigating incidents to changing systems. Your permission and approval design now carries the risk.</p>
+<p class="src">Sources: <a href="https://docs.aws.amazon.com/devopsagent/latest/userguide/whats-new.html">AWS DevOps Agent: What's new</a></p>
+</div>
+<div class="c">
+<span class="gr">Engineering &amp; Tooling</span>
+<h3>Google Agent Compute Engine: microVM sandboxes that keep credentials outside the agent</h3>
+<p class="sub"><em>Grounding: Single secondary source (InfoQ, Nov 22). Google's own deep dive was not fetched. Not yet available; no pricing.</em></p>
+<p>InfoQ reports a managed service that runs agents in isolated microVMs with checkpoint and resume. API keys and OAuth tokens stay outside the sandbox, and an external gateway injects them. A critic quoted by InfoQ notes the deep dive gives no boot time, price, or density figures.</p>
+<p class="why"><strong>Why it matters:</strong> Keeping secrets out of the sandbox is the same lesson as today's lead, applied to compute. Watch for the preview.</p>
+<p class="src">Sources: <a href="https://www.infoq.com/news/2026/11/google-agent-compute-engine/">InfoQ: Google Agent Compute Engine</a></p>
+</div>
+<div class="c">
+<span class="gr">Engineering &amp; Tooling</span>
+<h3>Gemini 4 Neon in Antigravity CLI scores level with Claude Code at under half the cost per task</h3>
+<p class="sub"><em>Grounding: Single secondary source (The Neuron, Nov 20), reporting Artificial Analysis figures. The Artificial Analysis pages were not fetched.</em></p>
+<p>The Neuron reports that Neon in Google's Antigravity CLI scored 59 on the Artificial Analysis Coding Agent Index, against 58 for Claude Fable 5.2 in Claude Code. Cost per task was $6.86 against $15.47. The cost figures depend on token prices that change on December 1.</p>
+<p class="why"><strong>Why it matters:</strong> The comparison is between model-plus-harness pairs. Check cost per task on your own workload before switching.</p>
+<p class="src">Sources: <a href="https://www.theneuron.ai/news/gemini-4-neon-claude-code-benchmark-cost/">The Neuron: Gemini 4 Neon vs Claude Code</a></p>
+</div>
+</div>
+<h2>Research</h2>
+<div class="g">
+<div class="c">
+<span class="gr">Research</span>
+<h3>METR: frontier time horizons near 40 hours, doubling about every 3.6 months, and harder to measure</h3>
+<p class="sub"><em>Grounding: Primary (METR post, Nov 20, first 100,000 characters read; appendices not reviewed). Secondary: The Decoder (Nov 22).</em></p>
+<p>METR puts the 50% time horizon at 40 hours for GPT-6 Astra and 39 hours for Opus 5.5, with very wide confidence intervals. The pooled doubling time is about 3.61 months. Human data directly informs only about 9% of its time estimates. Models do worse where feedback is slow or unclear.</p>
+<p class="why"><strong>Why it matters:</strong> Long-horizon agent work is getting more feasible. The error bars are wide enough that you should test on your own tasks.</p>
+<p class="src">Sources: <a href="https://metr.org/blog/2026-11-20-q4-2026-capability-update/">METR: Q4 2026 capability update</a> · <a href="https://the-decoder.com/ai-is-getting-better-faster-than-experts-can-reliably-test-whether-new-systems-are-safe-metr-warns/">The Decoder</a></p>
+</div>
+<div class="c">
+<span class="tag w">UNVERIFIED</span> <span class="gr">Research</span>
+<h3>A Claude-assisted Riemann hypothesis proof compiles in Lean; mathematicians are still reviewing it</h3>
+<p class="sub"><em>Grounding: Two secondary sources (TechCrunch, Nov 20; Simon Willison's quotation posts, Nov 20). The proof document was not fetched. Not accepted by the mathematical community.</em></p>
+<p>Anthropic mathematician Levent Alpöge says he found a proof working with Claude. TechCrunch reports that several people, including MIT's Andrew Sutherland, confirmed it compiles in Lean. A separate human-written proof of the generalized hypothesis, by Alessandro Masullo, was announced the same day and has not been formalized.</p>
+<p class="why"><strong>Why it matters:</strong> A compiled proof shows the formal statement holds. Whether that statement is the intended theorem is the open question. Treat it as open.</p>
+<p class="src">Sources: <a href="https://techcrunch.com/2026/11/20/ai-claimed-a-solution-to-the-167-year-old-riemann-hypothesis-and-a-human-did-too/">TechCrunch (Nov 20)</a> · <a href="https://simonwillison.net/2026/Nov/20/levent-alpoge/">Simon Willison: Alpöge</a> · <a href="https://simonwillison.net/2026/Nov/20/ravi-vakil/">Simon Willison: Vakil</a></p>
+</div>
+</div>
+<h2>Industry</h2>
+<div class="g">
+<div class="c">
+<span class="gr">Industry</span>
+<h3>OpenAI now requires approval for gateways and routers that resell its models</h3>
+<p class="sub"><em>Grounding: Single secondary source (Semafor, Nov 20). OpenAI's policy page was not fetched; the effective date comes from a roundup only.</em></p>
+<p>Semafor reports that third-party gateways and routers need OpenAI's review and approval before offering access to its models. It names OpenRouter as the most prominent example. The stated background is distillation through resellers that hide the end user.</p>
+<p class="why"><strong>Why it matters:</strong> With today's lead, this is a second sign that the routing layer is tightening. Check that your gateway is approved.</p>
+<p class="src">Sources: <a href="https://www.semafor.com/article/11/20/2026/openai-tightens-grip-on-model-resellers">Semafor (Nov 20)</a></p>
+</div>
+<div class="c">
+<span class="gr">Industry</span>
+<h3>Microsoft's Charles Lamanna: engineers write less code and manage agents on a token budget</h3>
+<p class="sub"><em>Grounding: Single source (Peter Yang's newsletter, inbox, Nov 22). An interview recap; team-size figures are as relayed, not verified.</em></p>
+<p>Lamanna, Microsoft's EVP for Copilot and Agents, says his strongest engineers now focus on architecture, testing, and running agents. Yang relays that Copilot Cowork was built by 11 engineers.</p>
+<p class="why"><strong>Why it matters:</strong> One view of how engineering roles shift when code is cheap. It is an opinion, not data.</p>
+<p class="src">Sources: <a href="https://creatoreconomy.so/p/what-should-engineers-do-when-ai-writes-all-the-code-charles-lamanna">Peter Yang: What Should Engineers Do When AI Writes All the Code</a></p>
+</div>
+</div>
+</body></html>
