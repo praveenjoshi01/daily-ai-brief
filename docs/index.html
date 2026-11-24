@@ -1,103 +1,105 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Daily AI Brief 2026-11-23</title><style>:root{--bg:#f6f5f1;--fg:#1c1c1a;--card:#fff;--bd:#dedbd2;--ac:#b4441f;--mu:#6b6a64;--warn:#8a6d12}@media(prefers-color-scheme:dark){:root{--bg:#151513;--fg:#ecebe6;--card:#1f1f1c;--bd:#33332f;--ac:#f08a5d;--mu:#a3a29a;--warn:#e0c060}}
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Daily AI Brief 2026-11-24</title><style>:root{--bg:#f6f5f1;--fg:#1c1c1a;--card:#fff;--bd:#dedbd2;--ac:#b4441f;--mu:#6b6a64;--warn:#8a6d12}@media(prefers-color-scheme:dark){:root{--bg:#151513;--fg:#ecebe6;--card:#1f1f1c;--bd:#33332f;--ac:#f08a5d;--mu:#a3a29a;--warn:#e0c060}}
 body{background:var(--bg);color:var(--fg);font:16px/1.55 Georgia,serif;max-width:1000px;margin:auto;padding:24px 16px}a{color:var(--ac)}h1{margin:0}h2{border-bottom:2px solid var(--ac);padding-bottom:4px;margin-top:32px}h3{margin:.4em 0;font-size:1.05em}
 .g{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px}.c{background:var(--card);border:1px solid var(--bd);border-radius:8px;padding:10px 14px}.lead{grid-column:1/-1;border-color:var(--ac);border-width:2px}.tag{background:var(--ac);color:#fff;font:700 11px sans-serif;padding:2px 6px;border-radius:3px}.tag.w{background:var(--warn)}.gr{font:600 11px sans-serif;color:var(--mu);text-transform:uppercase;letter-spacing:.04em}.sub,.src{color:var(--mu);font-size:.9em}.why{font-size:.95em}.note{border-left:3px solid var(--ac);padding:4px 12px;color:var(--mu)}
-</style></head><body>
-<h1>Daily AI Brief — 2026-11-23</h1>
-<p class="sub">Light inbox (one AI-relevant edition, Nov 22), so today leans on pages fetched this run. Grounding labels show source strength. <a href="archive/">Archive</a></p>
-<p class="note">Ten items. Today's theme: the routing layer between you and the model. The lead shows prompts leaking at hops a privacy flag never reaches, OpenAI is gating resellers, and Google is moving credentials outside the agent sandbox. Single-source and unverified items are marked.</p>
+</style>
+</head><body>
+<h1>Daily AI Brief — 2026-11-24</h1>
+<p class="sub">Inbox editions read this run: TLDR AI and TLDR Dev (Nov 23), Import AI 482 (Nov 23), and AINews (Nov 24). Grounding labels show source strength. <a href="archive/">Archive</a></p>
+<p class="note">Ten items. Today&#x27;s theme: who checks the checker. The lead is Epoch AI&#x27;s audit of the benchmarks behind most leaderboard claims, Anthropic is letting an agent approve pull requests, and OpenAI and Cisco want agents writing kernel-level shields. Single-source items are marked.</p>
 <h2>Lead Story</h2>
 <div class="g">
 <div class="c lead">
 <span class="tag">LEAD</span> <span class="gr">Lead Story</span>
-<h3>Dragos canary-token study: about two million bait prompts found attackers inside three inference providers, and OpenRouter pulled 125 endpoints from ZDR eligibility</h3>
-<p class="sub"><em>Grounding: Primary (Dragos post by HD Moore, Nov 19, fetched), plus OpenRouter's announcement (Nov 22), Phala's and Together AI's incident notes (all fetched), and independent coverage by The Hacker News (Nov 22). Most providers are unnamed.</em></p>
-<p>From July to November, Dragos sent about two million prompts through routers and providers, each with a unique URL, DNS name, and AWS key. Attackers were stealing data inside three providers, including some requests flagged Zero Data Retention. One unnamed lab's systems fetched secret links from about two-thirds of ZDR-flagged requests. OpenRouter off-boarded three providers and says it was not itself breached.</p>
-<p class="why"><strong>Why it matters:</strong> A privacy flag binds only the first hop. Pin your upstream providers, keep secrets out of agent context, and plant your own canary credential.</p>
-<p class="src">Sources: <a href="https://www.dragos.com/blog/ai-supply-chain-security-canary-tokens">Dragos: Your AI supply chain needs canaries</a> · <a href="https://openrouter.ai/blog/announcements/data-processing-incidents-on-inference-providers/">OpenRouter announcement</a> · <a href="https://phala.com/posts/phala-november-preliminary-incident-report">Phala incident report</a> · <a href="https://www.together.ai/blog/security-event-prompt-leakage-for-requests-in-june-and-july-of-2026">Together AI security notice</a> · <a href="https://thehackernews.com/2026/11/openrouter-drops-3-providers-after.html">The Hacker News</a></p>
+<h3>Epoch AI&#x27;s Benchmark Reviews: 15 of 30 audited benchmarks are rated Flawed, including SWE-bench Verified, SWE-Bench Pro, Terminal-Bench 4.0.0 and OSWorld 2.1</h3>
+<p class="sub"><em>Grounding: Primary (Epoch&#x27;s review pages for Agents&#x27; Last Exam, Vending-Bench 2, OSWorld 2.1, Humanity&#x27;s Last Exam and SWE-bench Verified, plus its rubric, FAQ and benchmark list, all fetched), and the Agents&#x27; Last Exam team&#x27;s published rebuttal (fetched). The reviews are dated Aug 10 to Nov 11; AINews (Nov 24) flagged the two most recent agent reviews.</em></p>
+<p>Epoch samples about 50 tasks per benchmark and rates it Flawed when errors affect at least 20% of the score. Six benchmarks are Verified and nine could not be reviewed. In Agents&#x27; Last Exam v1.1, 22 of 50 sampled tasks could earn full marks through a shortcut. The benchmark&#x27;s team replies that only 3 of 1,617 recorded runs took one.</p>
+<p class="why"><strong>Why it matters:</strong> Check a benchmark&#x27;s verdict before you quote a score gap. Then run the same audit on your own evals: can a task pass without the work, and does the grader reject correct work?</p>
+<p class="src">Sources: <a href="https://epoch.ai/data/benchmark-reviews-documentation/included-benchmarks">Epoch: included benchmarks</a> · <a href="https://epoch.ai/data/benchmark-reviews-documentation/methodology">Epoch: methodology</a> · <a href="https://epoch.ai/benchmarks/agents-last-exam/review">Agents&#x27; Last Exam review</a> · <a href="https://epoch.ai/benchmarks/vending-bench-2/review">Vending-Bench 2 review</a> · <a href="https://epoch.ai/benchmarks/osworld-2-1/review">OSWorld 2.1 review</a> · <a href="https://agents-last-exam.org/blogs/verifier-check">ALE team response</a></p>
 </div>
 </div>
 <h2>Frontier Labs</h2>
 <div class="g">
 <div class="c">
 <span class="gr">Frontier Labs</span>
-<h3>Thinking Machines Inkling 2 Mini: an open-weights looped transformer that fits in about 20 GB</h3>
-<p class="sub"><em>Grounding: Primary (lab post, Nov 20, fetched). Benchmarks are self-reported. License not stated on the page.</em></p>
-<p>The model has 26.4B total parameters and 3.4B active per token. Its two middle blocks of layers run three times per token. The lab reports 48.2% on DeepSWE v1.1 and 71.6% on Terminal Bench v2.1, behind Qwen3.8-27B at 73.0%. It says the model is weaker on multi-turn chat and multi-constraint instructions.</p>
-<p class="why"><strong>Why it matters:</strong> A coding model that runs on a 32 GB Mac through Ollama is a real option for local agents. It also removes the third-party hop in today's lead story.</p>
-<p class="src">Sources: <a href="https://thinkingmachines.ai/news/inkling-2-mini/">Thinking Machines: Inkling 2 Mini</a></p>
+<h3>Anthropic launches Claude Ship: agents that review, fix and can approve pull requests</h3>
+<p class="sub"><em>Grounding: Independent coverage (TechCrunch, Nov 23, fetched) plus AINews (Nov 24). Anthropic&#x27;s own post was not fetched. No performance figures published.</em></p>
+<p>The suite has three parts. Code Review is generally available. PR Steward (beta) handles failing checks, merge conflicts and review feedback, and comments on what it changed. Claude Approvals (beta) applies an approval policy the team writes in plain language as a file in the repo. It is rolling out to Team and Enterprise plans on GitHub.</p>
+<p class="why"><strong>Why it matters:</strong> The approval policy becomes a file you own and review. TechCrunch reports Anthropic suggests starting in observe-only mode on one repository.</p>
+<p class="src">Sources: <a href="https://techcrunch.com/2026/11/23/anthropic-launches-claude-ship-letting-ai-agents-review-fix-and-approve-code-changes/">TechCrunch: Claude Ship</a></p>
 </div>
 <div class="c">
 <span class="gr">Frontier Labs</span>
-<h3>OpenAI publishes its internal perplexity numbers and proposes shared limits</h3>
-<p class="sub"><em>Grounding: Primary (OpenAI post by Jakub Pachocki, Nov 22, fetched). An opinion piece; figures are OpenAI's own and unverified.</em></p>
-<p>Pachocki reports log-perplexity on a held-out internal codebase: about 0.99 for GPT-3.5 and 0.91 for GPT-4. He says capabilities in mathematics and cybersecurity emerged below 0.8. He proposes that labs agree common limits tied to such measures. He also notes perplexity does not measure any task directly.</p>
-<p class="why"><strong>Why it matters:</strong> This is a pretraining-only metric. It says nothing about the harness, which is where most teams get their gains.</p>
+<h3>OpenAI and Cisco open-source Shirudo: agents write eBPF programs that block an exploit while the patch is prepared</h3>
+<p class="sub"><em>Grounding: Independent coverage (The Register, Nov 24, fetched) plus AINews. OpenAI&#x27;s post was not fetched. The claim that OpenAI validated 948 Linux kernel local-root bugs comes from AINews and search summaries only.</em></p>
+<p>Shirudo builds on Tetragon, from Cisco-owned Isovalent. Agents scan for vulnerable systems and write small in-kernel programs, called shields, as temporary protection. The Register reports the companies expect humans to check every shield before production. It also notes that this could drive demand for Codex, and that virtual patching is not new.</p>
+<p class="why"><strong>Why it matters:</strong> A concrete case of agents writing kernel-level controls. The human review step is where the safety sits.</p>
+<p class="src">Sources: <a href="https://www.theregister.com/security/2026/11/24/cisco-and-openai-pitch-ebpf-kernel-plugins-as-the-way-to-tame-the-patchpocalypse/5311795">The Register: Cisco and OpenAI pitch eBPF kernel plugins</a></p>
+</div>
+<div class="c">
+<span class="gr">Frontier Labs</span>
+<h3>Follow-up: Microsoft reports a perplexity figure on OpenAI&#x27;s test set, and critics list the confounds</h3>
+<p class="sub"><em>Grounding: Single secondary source for the new details (AINews, Nov 24, relaying social posts). OpenAI&#x27;s original essay was fetched on Nov 23.</em></p>
+<p>AINews relays that Microsoft AI ran MAI-2 Base on OpenAI&#x27;s evaluation set and reported 0.819. It also relays criticism: tokenizer differences could bias a shared limit, the pretraining metric ignores post-training compute, and OpenAI has not released the test set.</p>
+<p class="why"><strong>Why it matters:</strong> Still a pretraining-only number. Treat cross-lab comparisons as rough until the test set is public.</p>
 <p class="src">Sources: <a href="https://openai.com/index/perplexity-and-intelligence/">OpenAI: Perplexity and Intelligence</a></p>
 </div>
-</div>
-<h2>Engineering &amp; Tooling</h2>
-<div class="g">
 <div class="c">
-<span class="gr">Engineering &amp; Tooling</span>
-<h3>AWS DevOps Agent can now take directed write actions in five third-party services</h3>
-<p class="sub"><em>Grounding: Primary (AWS "What's new" documentation, entries dated Nov 20–22, fetched).</em></p>
-<p>Customers can let the agent create and update pull requests, retry pipelines, and roll back deployments in GitHub, GitLab, and Azure DevOps, and update incidents in ServiceNow and PagerDuty. On Nov 21, the Sandbox was extended to custom agents, with read-only AWS access and a network allowlist.</p>
-<p class="why"><strong>Why it matters:</strong> The agent moves from investigating incidents to changing systems. Your permission and approval design now carries the risk.</p>
-<p class="src">Sources: <a href="https://docs.aws.amazon.com/devopsagent/latest/userguide/whats-new.html">AWS DevOps Agent: What's new</a></p>
-</div>
-<div class="c">
-<span class="gr">Engineering &amp; Tooling</span>
-<h3>Google Agent Compute Engine: microVM sandboxes that keep credentials outside the agent</h3>
-<p class="sub"><em>Grounding: Single secondary source (InfoQ, Nov 22). Google's own deep dive was not fetched. Not yet available; no pricing.</em></p>
-<p>InfoQ reports a managed service that runs agents in isolated microVMs with checkpoint and resume. API keys and OAuth tokens stay outside the sandbox, and an external gateway injects them. A critic quoted by InfoQ notes the deep dive gives no boot time, price, or density figures.</p>
-<p class="why"><strong>Why it matters:</strong> Keeping secrets out of the sandbox is the same lesson as today's lead, applied to compute. Watch for the preview.</p>
-<p class="src">Sources: <a href="https://www.infoq.com/news/2026/11/google-agent-compute-engine/">InfoQ: Google Agent Compute Engine</a></p>
-</div>
-<div class="c">
-<span class="gr">Engineering &amp; Tooling</span>
-<h3>Gemini 4 Neon in Antigravity CLI scores level with Claude Code at under half the cost per task</h3>
-<p class="sub"><em>Grounding: Single secondary source (The Neuron, Nov 20), reporting Artificial Analysis figures. The Artificial Analysis pages were not fetched.</em></p>
-<p>The Neuron reports that Neon in Google's Antigravity CLI scored 59 on the Artificial Analysis Coding Agent Index, against 58 for Claude Fable 5.2 in Claude Code. Cost per task was $6.86 against $15.47. The cost figures depend on token prices that change on December 1.</p>
-<p class="why"><strong>Why it matters:</strong> The comparison is between model-plus-harness pairs. Check cost per task on your own workload before switching.</p>
-<p class="src">Sources: <a href="https://www.theneuron.ai/news/gemini-4-neon-claude-code-benchmark-cost/">The Neuron: Gemini 4 Neon vs Claude Code</a></p>
+<span class="gr">Frontier Labs</span>
+<h3>Z.ai GLM-5.4: a 750B model converted to a loop transformer</h3>
+<p class="sub"><em>Grounding: Single secondary source (AINews, Nov 24). Z.ai&#x27;s blog page returned no content when fetched. AINews says no benchmarks have been published.</em></p>
+<p>AINews reports that Z.ai adapted its GLM-5 base through continued training so that 28 middle layers run twice per token. It is live for GLM Coding Plan users. API access and open weights are promised later.</p>
+<p class="why"><strong>Why it matters:</strong> The second looped model in a week, after Inkling 2 Mini. Wait for published benchmarks before acting on it.</p>
+<p class="src">Sources: <a href="https://z.ai/blog/glm-5.4">Z.ai: GLM-5.4 (not readable this run)</a></p>
 </div>
 </div>
 <h2>Research</h2>
 <div class="g">
 <div class="c">
 <span class="gr">Research</span>
-<h3>METR: frontier time horizons near 40 hours, doubling about every 3.6 months, and harder to measure</h3>
-<p class="sub"><em>Grounding: Primary (METR post, Nov 20, first 100,000 characters read; appendices not reviewed). Secondary: The Decoder (Nov 22).</em></p>
-<p>METR puts the 50% time horizon at 40 hours for GPT-6 Astra and 39 hours for Opus 5.5, with very wide confidence intervals. The pooled doubling time is about 3.61 months. Human data directly informs only about 9% of its time estimates. Models do worse where feedback is slow or unclear.</p>
-<p class="why"><strong>Why it matters:</strong> Long-horizon agent work is getting more feasible. The error bars are wide enough that you should test on your own tasks.</p>
-<p class="src">Sources: <a href="https://metr.org/blog/2026-11-20-q4-2026-capability-update/">METR: Q4 2026 capability update</a> · <a href="https://the-decoder.com/ai-is-getting-better-faster-than-experts-can-reliably-test-whether-new-systems-are-safe-metr-warns/">The Decoder</a></p>
+<h3>Nvidia Nemotron-Labs-Sigma: language models that write text by denoising blocks of token embeddings</h3>
+<p class="sub"><em>Grounding: Primary (Nvidia research page, fetched) plus TLDR AI (Nov 23) for the checkpoint count. Results are self-reported. No license or limitations stated on the page.</em></p>
+<p>Sigma comes at 3B and 8B parameters. For each block of text it starts from noise and denoises compact 16-dimensional token embeddings. Nvidia reports the 8B model averages 3.46x the throughput of its own token-by-token decoding on a GB200. TLDR AI counts 14 open checkpoints.</p>
+<p class="why"><strong>Why it matters:</strong> A possible route to faster small models for code completion. Test it on your own workload before trusting the speedup.</p>
+<p class="src">Sources: <a href="https://research.nvidia.com/labs/genair/sigma/">Nvidia: Nemotron-Labs-Sigma</a></p>
 </div>
 <div class="c">
-<span class="tag w">UNVERIFIED</span> <span class="gr">Research</span>
-<h3>A Claude-assisted Riemann hypothesis proof compiles in Lean; mathematicians are still reviewing it</h3>
-<p class="sub"><em>Grounding: Two secondary sources (TechCrunch, Nov 20; Simon Willison's quotation posts, Nov 20). The proof document was not fetched. Not accepted by the mathematical community.</em></p>
-<p>Anthropic mathematician Levent Alpöge says he found a proof working with Claude. TechCrunch reports that several people, including MIT's Andrew Sutherland, confirmed it compiles in Lean. A separate human-written proof of the generalized hypothesis, by Alessandro Masullo, was announced the same day and has not been formalized.</p>
-<p class="why"><strong>Why it matters:</strong> A compiled proof shows the formal statement holds. Whether that statement is the intended theorem is the open question. Treat it as open.</p>
-<p class="src">Sources: <a href="https://techcrunch.com/2026/11/20/ai-claimed-a-solution-to-the-167-year-old-riemann-hypothesis-and-a-human-did-too/">TechCrunch (Nov 20)</a> · <a href="https://simonwillison.net/2026/Nov/20/levent-alpoge/">Simon Willison: Alpöge</a> · <a href="https://simonwillison.net/2026/Nov/20/ravi-vakil/">Simon Willison: Vakil</a></p>
+<span class="gr">Research</span>
+<h3>Tencent Hy4: open weights with 770B parameters, 49B active per token, and a one-million-token context</h3>
+<p class="sub"><em>Grounding: Primary (Hugging Face model card, fetched). Benchmarks are self-reported. The card gives no release date; TLDR AI listed it on Nov 23.</em></p>
+<p>Hy4 reads text, images and video. It uses sparse attention and ships a small built-in drafter model for speculative decoding. Tencent reports it leads open-weight models on its own finance and research task sets, and says it still trails top proprietary models on research-level math and long-horizon coding. It uses Tencent&#x27;s own license.</p>
+<p class="why"><strong>Why it matters:</strong> A large open-weight option for long-context work. Read the license before you plan a deployment.</p>
+<p class="src">Sources: <a href="https://huggingface.co/tencent/Hy4">Hugging Face: tencent/Hy4</a></p>
+</div>
+<div class="c">
+<span class="gr">Research</span>
+<h3>SciResearch-Eval: a Lawrence Livermore benchmark where the simulator handed to the agent may be wrong</h3>
+<p class="sub"><em>Grounding: Single secondary source (Import AI 482, Nov 23). The arXiv paper was not located this run.</em></p>
+<p>Import AI describes a benchmark in which an agent designs heating experiments, fits a supplied heat-conduction simulator, and reports material properties with 95% intervals. The simulator may be missing real physics. Import AI quotes the authors as finding only GPT-6 Astra and Claude Fable 5.2 reliable at default settings in that case.</p>
+<p class="why"><strong>Why it matters:</strong> It tests whether an agent reports honest uncertainty when its tools are wrong. That skill matters for any agent that relies on a tool.</p>
+<p class="src">Sources: <a href="https://importai.substack.com/p/import-ai-482-huawei-kernel-benchmarks">Import AI 482</a></p>
+</div>
+</div>
+<h2>Engineering &amp; Tooling</h2>
+<div class="g">
+<div class="c">
+<span class="gr">Engineering &amp; Tooling</span>
+<h3>vLLM v0.34.0 sizes the KV cache from the GPU memory that is actually free</h3>
+<p class="sub"><em>Grounding: Primary (GitHub release notes, dated Nov 16, first 100,000 characters read). The NVMe offload result is from AINews only (Nov 24) and was not found in the release notes.</em></p>
+<p>The extensible KV cache is now on by default, and gpu_memory_utilization defaults to 1.0. One example grew from 433k to 672k cached tokens on an H200. The notes report 6 to 18% slower per-token decoding on some H200 models at concurrency 128. Separately, AINews relays a vLLM test in which 4.6 TB of NVMe gave 5.1x the throughput of 1 TB of DRAM at 70 sessions.</p>
+<p class="why"><strong>Why it matters:</strong> Review your launch flags before you upgrade. The default block size also changed from 16 to 64.</p>
+<p class="src">Sources: <a href="https://github.com/vllm-project/vllm/releases/tag/v0.34.0">vLLM v0.34.0 release notes</a></p>
 </div>
 </div>
 <h2>Industry</h2>
 <div class="g">
 <div class="c">
 <span class="gr">Industry</span>
-<h3>OpenAI now requires approval for gateways and routers that resell its models</h3>
-<p class="sub"><em>Grounding: Single secondary source (Semafor, Nov 20). OpenAI's policy page was not fetched; the effective date comes from a roundup only.</em></p>
-<p>Semafor reports that third-party gateways and routers need OpenAI's review and approval before offering access to its models. It names OpenRouter as the most prominent example. The stated background is distillation through resellers that hide the end user.</p>
-<p class="why"><strong>Why it matters:</strong> With today's lead, this is a second sign that the routing layer is tightening. Check that your gateway is approved.</p>
-<p class="src">Sources: <a href="https://www.semafor.com/article/11/20/2026/openai-tightens-grip-on-model-resellers">Semafor (Nov 20)</a></p>
-</div>
-<div class="c">
-<span class="gr">Industry</span>
-<h3>Microsoft's Charles Lamanna: engineers write less code and manage agents on a token budget</h3>
-<p class="sub"><em>Grounding: Single source (Peter Yang's newsletter, inbox, Nov 22). An interview recap; team-size figures are as relayed, not verified.</em></p>
-<p>Lamanna, Microsoft's EVP for Copilot and Agents, says his strongest engineers now focus on architecture, testing, and running agents. Yang relays that Copilot Cowork was built by 11 engineers.</p>
-<p class="why"><strong>Why it matters:</strong> One view of how engineering roles shift when code is cheap. It is an opinion, not data.</p>
-<p class="src">Sources: <a href="https://creatoreconomy.so/p/what-should-engineers-do-when-ai-writes-all-the-code-charles-lamanna">Peter Yang: What Should Engineers Do When AI Writes All the Code</a></p>
+<h3>Nvidia&#x27;s board reinstates Jensen Huang as president and CEO, eleven days after his resignation</h3>
+<p class="sub"><em>Grounding: Primary (Nvidia press release, Nov 23, fetched) plus AINews (Nov 24).</em></p>
+<p>The board voted unanimously and said it consulted senior U.S. government officials. Colette Kress returns to the CFO role. The independent directors&#x27; investigation continues, and the board formed a National Security and Export Control Committee.</p>
+<p class="why"><strong>Why it matters:</strong> Leadership at the main GPU supplier is settled for now. The investigation and export-control oversight are still open.</p>
+<p class="src">Sources: <a href="https://investor.nvidia.com/news/press-release-details/2026/NVIDIA-Board-Reinstates-Jensen-Huang-as-President-CEO-and-Board-Director/default.aspx">Nvidia press release</a></p>
 </div>
 </div>
+<p class="sub">Dropped from today&#x27;s list: Inkling 2 Mini, the METR update and the Riemann proof (all covered Nov 23, nothing new fetched), Gemini API file slicing and Google&#x27;s Gemini 4 Neon numbers (social posts only), Noeri&#x27;s $110M raise, Sierra&#x27;s valuation, and the consumer and finance items. Searches for the vLLM NVMe test, the Z.ai post and the Livermore paper did not return the primary pages, so those items are labelled accordingly.</p>
 </body></html>
