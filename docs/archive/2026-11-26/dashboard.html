@@ -1,0 +1,105 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Daily AI Brief 2026-11-26</title><style>:root{--bg:#f6f5f1;--fg:#1c1c1a;--card:#fff;--bd:#dedbd2;--ac:#b4441f;--mu:#6b6a64;--warn:#8a6d12}@media(prefers-color-scheme:dark){:root{--bg:#151513;--fg:#ecebe6;--card:#1f1f1c;--bd:#33332f;--ac:#f08a5d;--mu:#a3a29a;--warn:#e0c060}}
+body{background:var(--bg);color:var(--fg);font:16px/1.55 Georgia,serif;max-width:1000px;margin:auto;padding:24px 16px}a{color:var(--ac)}h1{margin:0}h2{border-bottom:2px solid var(--ac);padding-bottom:4px;margin-top:32px}h3{margin:.4em 0;font-size:1.05em}
+.g{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px}.c{background:var(--card);border:1px solid var(--bd);border-radius:8px;padding:10px 14px}.lead{grid-column:1/-1;border-color:var(--ac);border-width:2px}.tag{background:var(--ac);color:#fff;font:700 11px sans-serif;padding:2px 6px;border-radius:3px}.tag.w{background:var(--warn)}.gr{font:600 11px sans-serif;color:var(--mu);text-transform:uppercase;letter-spacing:.04em}.sub,.src{color:var(--mu);font-size:.9em}.why{font-size:.95em}.note{border-left:3px solid var(--ac);padding:4px 12px;color:var(--mu)}
+</style>
+</head><body>
+<h1>Daily AI Brief — 2026-11-26</h1>
+<p class="sub">Inbox editions read this run: TLDR AI and TLDR Dev (Nov 25), AINews (Nov 25), and the free part of Refactoring&#x27;s Nov 25 essay. Grounding labels show source strength. <a href="../">Archive</a></p>
+<p class="note">Ten items. Today&#x27;s theme: what the harness does with a long job. The lead is Paradigm 3&#x27;s swarm study, where a single agent restarted with fresh context scored 97.0% against 93.2% for a team of eight on the same token budget. Anthropic&#x27;s Rust migration and Refactoring&#x27;s durable-execution essay land on the same point from the engineering side. Single-source items are marked.</p>
+<h2>Lead Story</h2>
+<div class="g">
+<div class="c lead">
+<span class="tag">LEAD</span> <span class="gr">Lead Story</span>
+<h3>Paradigm 3&#x27;s swarm study: a single agent restarted with fresh context beat a team of eight, 97.0% to 93.2%, on the same token budget</h3>
+<p class="sub"><em>Grounding: Primary (Paradigm 3&#x27;s write-up, Nov 24, fetched twice; code and data released) plus TLDR AI&#x27;s summary (Nov 25). No independent technical commentary was found. The restart experiment covers one task and two OpenAI models.</em></p>
+<p>Across 1,100+ runs, teams of eight agents finished about 6x sooner than one agent given the same weighted-token budget and scored about 7% lower on average. On the one task where a team clearly won (93.2% vs 83.7% at 32M tokens), splitting the single agent&#x27;s budget into eight fresh sessions that keep their files lifted it to 97.0%. The authors conclude that earlier swarm gains are explained by a single agent going stale.</p>
+<p class="why"><strong>Why it matters:</strong> Before you add agents, restart the one you have. Session boundaries with state on disk are a cheaper experiment than a coordination layer.</p>
+<p class="src">Sources: <a href="https://www.paradigm3.org/research/swarms">Paradigm 3: Swarms do not yet raise the roof</a> · <a href="https://tldr.tech/ai">TLDR AI</a></p>
+</div>
+</div>
+<h2>Frontier Labs</h2>
+<div class="g">
+<div class="c">
+<span class="gr">Frontier Labs</span>
+<h3>Anthropic moved the Messages API from Python to Rust, with the old service as the oracle and agents closing the gaps</h3>
+<p class="sub"><em>Grounding: Primary (Anthropic engineering post, Nov 25, fetched), flagged by AINews (Nov 25). All figures are Anthropic&#x27;s own; the CPU chart covers one region.</em></p>
+<p>Each request ran the model once and replayed its output to the Rust version, so both sides saw identical model output. Parity on production inputs rose from about 24% in late April to 99.6% by August. Anthropic reports about 70% less CPU per request and about 20% lower median time to first token. It says agents took the cheapest route to a match, and an engineer had to reject one throwaway workaround.</p>
+<p class="why"><strong>Why it matters:</strong> A working system is the best spec an agent can get. Keep human review as a gate, because a parity check rewards matching, not good code.</p>
+<p class="src">Sources: <a href="https://www.anthropic.com/research/migrating-api-to-rust">Anthropic: Migrating the Messages API to Rust</a></p>
+</div>
+<div class="c">
+<span class="gr">Frontier Labs</span>
+<h3>Claude can now load skills from MCP servers; background tasks and mid-call user prompts are generally available</h3>
+<p class="sub"><em>Grounding: Primary (Anthropic product post, Nov 24, fetched), linked by TLDR Dev (Nov 25).</em></p>
+<p>Servers can publish skills next to their tools, and Claude loads one only when needed (public beta; Enterprise not yet). Tasks let a server run a long operation in the background. Elicitation lets a server pause and ask the user, for example before destructive SQL. File uploads that bypass the context window are announced but not rolling out yet.</p>
+<p class="why"><strong>Why it matters:</strong> If you ship an MCP server, your playbook can now ship with it. Put confirmation prompts on anything destructive.</p>
+<p class="src">Sources: <a href="https://claude.com/resources/articles/skills-over-mcp-tasks-and-more">Anthropic: Skills over MCP, tasks and more</a></p>
+</div>
+<div class="c">
+<span class="gr">Frontier Labs</span>
+<h3>Cognition&#x27;s SWE-2.1 doubles SWE-2 on Terminal-Bench 4.1 (24.2 to 50.0) and still trails the frontier models there</h3>
+<p class="sub"><em>Grounding: Primary (Cognition&#x27;s post, Nov 24, fetched), listed by TLDR AI and TLDR Dev (Nov 25). All scores are self-reported, and competitors ran in different harnesses.</em></p>
+<p>Cognition says SWE-2.1 was trained with reinforcement learning on Kimi K3, with broader environments and multi-day runs. On Terminal-Bench 4.1 it scores 50.0 against 65.8 for Claude Opus 5.5 and 65.2 for Gemini 4 Neon in Cognition&#x27;s own table. An Ultrafast version runs the same model about 10x faster through Cerebras. The post says the model found new sandbox weaknesses four times during training.</p>
+<p class="why"><strong>Why it matters:</strong> A fast mid-tier coding model is useful for the inner loop. Check it on your own tasks, since the comparison mixes model and harness.</p>
+<p class="src">Sources: <a href="https://cognition.com/blog/swe-2-1">Cognition: Introducing SWE-2.1</a></p>
+</div>
+</div>
+<h2>Research</h2>
+<div class="g">
+<div class="c">
+<span class="gr">Research</span>
+<h3>Harvey post-trains five open-weight models on legal work: rubric scores rise, extraction F1 falls on all five</h3>
+<p class="sub"><em>Grounding: Primary (Harvey Research post, Nov 24, fetched), listed by TLDR AI (Nov 25). Self-reported; the judge model is not yet calibrated against lawyers.</em></p>
+<p>Harvey and Baseten trained rank-64 LoRA adapters with reinforcement learning, rewarding an LLM judge&#x27;s pass/fail rubric scores. Muse Spark Open went from 25.8% to 30.3% all-pass on Harvey&#x27;s LAB benchmark. CUAD extraction F1 fell 2.4 to 9.4 points across all five models. Lawyers preferred three of the tuned models and showed no clear preference for the other two.</p>
+<p class="why"><strong>Why it matters:</strong> Optimising a rubric moves the rubric. Keep an unrelated benchmark in the loop to see what you paid for the gain.</p>
+<p class="src">Sources: <a href="https://www.harvey.ai/blog/applying-the-harvey-tenet-training-recipe-to-us-open-weight-models">Harvey: Pushing the US Open-Weight Frontier</a></p>
+</div>
+<div class="c">
+<span class="gr">Research</span>
+<h3>PrismML&#x27;s Ternary Bonsai 2.5 fits a 27B coding model in 5.9 GB and scores 75.6 on SWE-bench Verified against 80.6 at full precision</h3>
+<p class="sub"><em>Grounding: Primary (PrismML&#x27;s post, Nov 24, fetched), listed by TLDR AI and discussed in AINews&#x27;s Reddit recap (Nov 25). Vendor-reported; the whitepaper was not fetched.</em></p>
+<p>The model is a compressed Qwen3.8 27B under Apache 2.0, running through llama.cpp and MLX. PrismML&#x27;s table shows AppWorld at 90.5 against 93.2 for the base and Terminal-Bench 2.1 at 60.1 against 70.8. The previous Bonsai release scored 60.8 on SWE-bench Verified at the same size.</p>
+<p class="why"><strong>Why it matters:</strong> On-device agents are getting close enough to test. The Terminal-Bench gap says to check long tool-use tasks first.</p>
+<p class="src">Sources: <a href="https://prismml.com/news/bonsai-2-5-27b">PrismML: Ternary Bonsai 2.5 27B</a></p>
+</div>
+<div class="c">
+<span class="tag w">UNCONFIRMED</span> <span class="gr">Research</span>
+<h3>OpenAI papers claim the matrix multiplication exponent is exactly 9/4</h3>
+<p class="sub"><em>Grounding: Secondary only (AINews and TLDR AI, Nov 25, relaying social posts). The new lower-bound paper was not fetched. A search confirmed only October&#x27;s upper bound, through an independent exposition on arXiv.</em></p>
+<p>In October, OpenAI posted a proof that the exponent is at most 9/4. AINews reports a new paper claiming a matching lower bound, which would fix the value. It also relays that most experts expected the exponent to be 2, and that OpenAI&#x27;s own revision log records three withdrawals in October after a sign error. The papers are unrefereed.</p>
+<p class="why"><strong>Why it matters:</strong> Nothing to change in your code. The asymptotic result is not a practical algorithm, and the claim has not been reviewed.</p>
+<p class="src">Sources: <a href="https://lspace.beehiiv.com/p/ainews-math-proofs-are-landing-faster-than-we-can-read-them">AINews, Nov 25</a> · <a href="https://arxiv.org/abs/2611.09716">arXiv 2611.09716 (search result, not fetched)</a></p>
+</div>
+</div>
+<h2>Engineering &amp; Tooling</h2>
+<div class="g">
+<div class="c">
+<span class="gr">Engineering &amp; Tooling</span>
+<h3>Refactoring on durable execution for agents: the runtime retries, the agent reads errors, the database guards what must not happen twice</h3>
+<p class="sub"><em>Grounding: Inbox essay (Refactoring, Nov 25), free section read; the rest is behind the paywall. Written in partnership with Inngest, which sells durable-execution tooling.</em></p>
+<p>The essay treats an agent run as a loop of unreliable calls and checkpoints each one, so a failed run resumes from the last good step. It relays one team that ships about 2,500 articles a month with runs of 60 to 150 steps and deliberately turns retries off for most of them, because a bad auto-published article is the failure they fear most. Run state lives outside the sandbox.</p>
+<p class="why"><strong>Why it matters:</strong> Decide per step who owns the failure. Use an idempotency key for anything that sends, charges or publishes.</p>
+<p class="src">Sources: <a href="https://refactoring.fm/p/durable-execution-for-agents">Refactoring: Durable execution for AI agents</a></p>
+</div>
+<div class="c">
+<span class="gr">Engineering &amp; Tooling</span>
+<h3>How attention memory for a million tokens fell from 130.5 TB to 890 MB</h3>
+<p class="sub"><em>Grounding: Primary (three.dev blog post by Ximo Guanter, Nov 24, fetched), linked by TLDR Dev (Nov 25). The figures are the author&#x27;s own arithmetic and exclude model weights.</em></p>
+<p>The post walks the reductions in order. FlashAttention stopped storing the score table (130.5 TB to 2.5 TB on Llama 1 65B). Grouped-query and latent attention shrank the KV cache to 68.6 GB by DeepSeek-V3. Merging entries, sharing caches across layers and 4-bit storage bring DeepSeek-V4.1-Flash to 890 MB. Most later steps trade away some quality.</p>
+<p class="why"><strong>Why it matters:</strong> Long context got cheap through cache design. It helps explain why cached input is priced so far below output.</p>
+<p class="src">Sources: <a href="https://three.dev/blog/how-the-memory-for-a-million-tokens-shrank">three.dev: How the memory for a million tokens shrank</a></p>
+</div>
+</div>
+<h2>Industry</h2>
+<div class="g">
+<div class="c">
+<span class="tag w">UNCONFIRMED</span> <span class="gr">Industry</span>
+<h3>Amazon says attackers&#x27; AI agents found and exploited a zero-day with little human input</h3>
+<p class="sub"><em>Grounding: Single secondary source (TLDR AI, Nov 25). A search did not find Amazon&#x27;s or Palo Alto Networks&#x27; own reports.</em></p>
+<p>TLDR AI reports that agents running on Cairn, an open-source penetration-testing framework, found and exploited a zero-day in a medical imaging AI app on a university server from a goal prompt alone. It also reports that Palo Alto Networks tracked a Cairn campaign of 25 autonomous operations against at least 19 organisations, breaching at least 10.</p>
+<p class="why"><strong>Why it matters:</strong> Internet-facing AI apps are targets for automated attackers. Patch and monitor them like any other exposed service.</p>
+<p class="src">Sources: <a href="https://tldr.tech/ai">TLDR AI</a></p>
+</div>
+</div>
+<p class="sub">Dropped from today&#x27;s list: OpenAI&#x27;s GPT-6 protein-design post and Hugging Face&#x27;s 1,000-agent run (searches did not return the primary pages), the VP vs VNP proofs and Google&#x27;s Cogentic papers (social posts and secondhand summaries only), SemiAnalysis&#x27;s GDPx evaluation and the DX newsletter&#x27;s Microsoft outage piece (in the inbox, not read this run), vLLM-GR, Inkling 2 Mini, Gemini 4 Neon usage figures, the Nvidia follow-ups, staff moves, and the consumer and policy items.</p>
+</body></html>
